@@ -38,16 +38,22 @@
 
 	var HeadersView = Backbone.View.extend({
 		events: {
-			"click .options-headers-create-add": "createHeader"
+			"click .options-headers-create-add": "createHeader",
+			"click .clear-all-headers": "removeAll"
 		},
 		
 		initialize: function(attributes, options) {
+			
 			this.headers = options.headers;
 			this.headers.fetch();
 
+			// this.$createDescription = this.$el.find(".options-headers-create-description");
+			// this.$createHeader = this.$el.find(".options-headers-create-header");
+			// this.$createValue = this.$el.find(".options-headers-create-value");
+			// this.$createActive = this.$el.find(".options-headers-create-active");
+
 			this.$createDescription = this.$el.find(".options-headers-create-description");
-			this.$createHeader = this.$el.find(".options-headers-create-header");
-			this.$createValue = this.$el.find(".options-headers-create-value");
+			this.$addedHeadersJson = this.$el.find(".options-headers-create-json");
 			this.$createActive = this.$el.find(".options-headers-create-active");
 
 			this.listenTo(this.headers, "add", this.renderSingle);
@@ -56,9 +62,13 @@
 			this.renderAll();
 			this.$el.show();
 		},
-		remove: function() {
+		remove: function(header) {
 			this.$el.find("tbody").find(".options-headers-row").remove();
 			this.$el.hide();
+		},
+		removeAll: function() {
+			this.$el.find(".options-headers-row").remove();
+			localStorage.clear()
 		},
 
 		renderSingle: function(header) {
@@ -70,17 +80,35 @@
 		},
 
 		createHeader: function() {
-			this.headers.create({
-				description: this.$createDescription.val(),
-				header: this.$createHeader.val(),
-				value: this.$createValue.val(),
-				active: this.$createActive.is(":checked")
+			// add some header fields
+			var headersFields = JSON.parse(this.$addedHeadersJson.val())
+			Object.keys(headersFields).forEach(key => {
+				this.headers.create({
+					description: this.$createDescription.val(),
+					header: key,
+					value: headersFields[key],
+					active: this.$createActive.is(":checked")
+				});
 			});
 
+			// clear edit input
 			this.$createDescription.val("");
-			this.$createHeader.val("");
-			this.$createValue.val("");
+			this.$addedHeadersJson.val("");
 			this.$createActive.prop("checked", true);
+
+			// add a header field
+			// this.headers.create({
+			// 	description: this.$createDescription.val(),
+			// 	header: this.$createHeader.val(),
+			// 	value: this.$createValue.val(),
+			// 	active: this.$createActive.is(":checked")
+			// });
+
+			// clear edit input
+			// this.$createDescription.val("");
+			// this.$createHeader.val("");
+			// this.$createValue.val("");
+			// this.$createActive.prop("checked", true);
 		}
 	});
 

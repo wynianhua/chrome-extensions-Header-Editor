@@ -74,7 +74,13 @@
 	left: 0;
 	top: 0;
 }
+.options-headers-create-json {
+	width: 300px;
+}
 
+.clear-all-headers-td {
+	text-align: right;
+}
 /* Options Request */
 
 /* Options Response */

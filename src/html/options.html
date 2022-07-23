@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<title data-text="options_head_title"></title>
 	
 		<link rel="stylesheet" type="text/css" href="/src/css/common.css" />
@@ -27,6 +28,7 @@
 			</div>
 			<div id="options-right">
 				<div id="options-pane">
+					<!-- request header -->
 					<div id="options-request">
 						<h2 data-text="request_title"></h2>
 						<hr />
@@ -35,25 +37,39 @@
 								<thead>
 									<tr>
 										<th data-text="headers_description"></th>
+										<!-- <th>headersJson</th> -->
 										<th data-text="headers_header"></th>
 										<th data-text="headers_value"></th>
 										<th data-text="headers_active"></th>
-										<th></th>
+										<th>operate</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td><label><input type="text" class="options-headers-create-description"  /></label></td>
+									<!-- <tr>
+										<td><label><input type="text" class="options-headers-create-description" /></label></td>
 										<td><label><input type="text" class="options-headers-create-header"  /></label></td>
 										<td><label><input type="text" class="options-headers-create-value" /></label></td>
 										<td><label><input type="checkbox" class="options-headers-create-active"  checked="true" /></label></td>
 										<td><button class="options-headers-create-add" data-text="headers_add"></button></td>
+									</tr> -->
+									<tr>
+										<td><label><input type="text" class="options-headers-create-description" /></label></td>
+										<td colspan="2"><input type="text" class="options-headers-create-json" placeholder="请输入json" /></td>
+										<!-- <td><label><input type="text" class="options-headers-create-header" /></label></td>
+										<td><label><input type="text" class="options-headers-create-value" /></label></td> -->
+										<td><label><input type="checkbox" class="options-headers-create-active" checked="true" /></label></td>
+										<td><button class="options-headers-create-add" data-text="headers_add"></button></td>
 									</tr>
-									<tr><td colspan="5"><hr /></td></tr>
+									<tr>
+										<td colspan="5" class="clear-all-headers-td">
+											<hr /><button class="clear-all-headers">clear all headers</button>
+										</td>
+									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
+					<!-- response header -->
 					<div id="options-response">
 						<h2 data-text="response_title"></h2>
 						<hr />
@@ -81,6 +97,7 @@
 							</table>
 						</div>
 					</div>
+					<!-- header about -->
 					<div id="options-about">
 						<h2 data-text="about_title"></h2>
 						<hr />
